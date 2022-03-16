@@ -16,11 +16,7 @@ async function run() {
       const subscribersCollection = database.collection("subscribers");
       const assessmentsCollection = database.collection("assessments");
   
-      
-  
-     
-  
-      // post api for offers
+      // post api for subscribers
       app.post('/subscribers', async(req,res)=>{
         const newSubscriber = req.body;
         const result = await subscribersCollection.insertOne(newSubscriber)
@@ -35,6 +31,14 @@ async function run() {
         const result = await assessmentsCollection.insertOne(newAssessment)
         console.log('got new user', req.body)
         console.log('added user', result)
+        res.json(result)
+      })
+
+      // get api for assessments
+      app.get('/assessments', async (req,res)=>{
+        const cursor = assessmentsCollection.find({})
+        const result = await cursor.toArray();
+        console.log(result)
         res.json(result)
       })
      
