@@ -29,8 +29,6 @@ async function run() {
       app.post('/assessments', async(req,res)=>{
         const newAssessment = req.body;
         const result = await assessmentsCollection.insertOne(newAssessment)
-        console.log('got new user', req.body)
-        console.log('added user', result)
         res.json(result)
       })
 
@@ -38,12 +36,11 @@ async function run() {
       app.get('/assessments', async (req,res)=>{
         const cursor = assessmentsCollection.find({})
         const result = await cursor.toArray();
-        console.log(result)
         res.json(result)
       })
      
     } finally {
-      // await client.close();
+  
     }
   }
   run().catch(console.dir);
