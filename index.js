@@ -14,6 +14,7 @@ async function run() {
       await client.connect();
       const database = client.db("skilline");
       const subscribersCollection = database.collection("subscribers");
+      const assessmentsCollection = database.collection("assessments");
   
       
   
@@ -23,6 +24,15 @@ async function run() {
       app.post('/subscribers', async(req,res)=>{
         const newSubscriber = req.body;
         const result = await subscribersCollection.insertOne(newSubscriber)
+        console.log('got new user', req.body)
+        console.log('added user', result)
+        res.json(result)
+      })
+
+      // post api for assessments
+      app.post('/assessments', async(req,res)=>{
+        const newAssessment = req.body;
+        const result = await assessmentsCollection.insertOne(newAssessment)
         console.log('got new user', req.body)
         console.log('added user', result)
         res.json(result)
