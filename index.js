@@ -36,7 +36,7 @@ async function run() {
       app.get('/assessments', async (req,res)=>{
         const cursor = assessmentsCollection.find({})
         const result = await cursor.toArray();
-        res.json(result)
+        res.send(result)
       })
      
     } finally {
